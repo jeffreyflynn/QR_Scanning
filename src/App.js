@@ -1,23 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { QRCodeReader } from './QrCodeReader';
+
+// HOST=192.168.86.47
 
 function App() {
+
+  const [isQRReaderVisible, setQRVisibiity] = useState(false);
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <button className="App-link" onClick={() => setQRVisibiity(true)}>
+          Scan QR Code
+        </button>
+        {/* {isQRReaderVisible && <QRCodeReader />} */}
+        <QRCodeReader />
       </header>
     </div>
   );
