@@ -55,11 +55,9 @@ export const QRCodeReader = ({qrCode, setQrCode}) => {
     handleAnimationFrame();
   }
 
-  const handlelQrCode = (code) => {
-    const { data } = code;
-
+  const handlelQrCode = ({data}) => {
     if (data !== qrCode) {
-      setQrCode(code.data);
+      setQrCode(data);
     }
   }
 
