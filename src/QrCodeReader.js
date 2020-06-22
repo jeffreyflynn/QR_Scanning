@@ -1,4 +1,4 @@
-import React, { useEffect, createRef } from 'react';
+import React, { useEffect, createRef, Fragment } from 'react';
 import jsQR from 'jsqr';
 
 function useMount(fn) {
@@ -62,9 +62,9 @@ export const QRCodeReader = ({qrCode, setQrCode}) => {
   }
 
   return (
-    <div>
+    <Fragment>
       <video ref={videoRef} />
       <canvas hidden={true} ref={canvasRef} />
-    </div>
+    </Fragment>
   )
 }
