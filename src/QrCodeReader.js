@@ -50,12 +50,9 @@ export const QRCodeReader = ({qrCode, setQrCode}) => {
 
       if (code) {
         handlelQrCode(code);
-      } else {
-        handleAnimationFrame();
       }
-    } else {
-      handleAnimationFrame();
     }
+    handleAnimationFrame();
   }
 
   const handlelQrCode = (code) => {
