@@ -7,7 +7,7 @@ function useMount(fn) {
   }, [fn])
 }
 
-export const QRCodeReader = () => {
+export const QRCodeReader = ({qrCode, setQrCode}) => {
   const height = window.innerHeight;
   const width = window.innerWidth;
 
@@ -20,10 +20,11 @@ export const QRCodeReader = () => {
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
         audio: false,
-        video: { height, width } // facingMode: { exact: "environment" }
+        video: { height, width, facingMode: "environment" }
       });
 
       videoRef.current.srcObject = mediaStream;
+      videoRef.current.setAttribute("playsinline", true); // // required to tell iOS safari we don't want fullscreen
       videoRef.current.play();
 
       handleAnimationFrame();
@@ -58,7 +59,11 @@ export const QRCodeReader = () => {
   }
 
   const handlelQrCode = (code) => {
-    console.log(code);
+    const { data } = code;
+
+    if (data !== qrCode) {
+      setQrCode(code.data);
+    }
   }
 
   return (
