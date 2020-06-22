@@ -24,7 +24,7 @@ export const QRCodeReader = ({qrCode, setQrCode}) => {
       });
 
       videoRef.current.srcObject = mediaStream;
-      videoRef.current.setAttribute("playsinline", true); // // required to tell iOS safari we don't want fullscreen
+      videoRef.current.setAttribute("playsinline", true);
       videoRef.current.play();
 
       handleAnimationFrame();
