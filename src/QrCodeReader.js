@@ -12,27 +12,32 @@ export const QRCodeReader = ({handlelQrCode}) => {
   const videoRef = createRef();
   const canvasRef = createRef();
 
+  useMount(() => getMediaStream());
+
   const handleAnimationFrame = () => requestAnimationFrame(scan);
 
-  useMount(async () => {
+  const getMediaStream = async () => {
     try {
-      const mediaStream = await navigator.mediaDevices.getUserMedia({
-        audio: false,
-        video: { height, width, facingMode: "environment" }
-      });
+      const hasUserMedia = Boolean(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
 
-      videoRef.current.srcObject = mediaStream;
-      videoRef.current.setAttribute("playsinline", true);
-      videoRef.current.play();
+      if (hasUserMedia) {
+        // `getUserMedia` can only be used from a HTTPS URL, localhost, of a file:// URL.
+        const mediaStream = await navigator.mediaDevices.getUserMedia({
+          audio: false,
+          video: { height, width, facingMode: "environment" }
+        });
 
-      handleAnimationFrame();
+        videoRef.current.srcObject = mediaStream;
+
+        handleAnimationFrame();
+      }
     } catch(err) {
       console.log(err);
     }
-  });
+  }
 
   const scan = () => {
-    if (videoRef.current.readyState === videoRef.current.HAVE_ENOUGH_DATA) {
+    if (videoRef.current && videoRef.current.readyState === videoRef.current.HAVE_ENOUGH_DATA) {
       const canvasContext = canvasRef.current.getContext('2d');
 
       canvasRef.current.width = width;
@@ -55,8 +60,8 @@ export const QRCodeReader = ({handlelQrCode}) => {
 
   return (
     <Fragment>
-      <video ref={videoRef} />
       <canvas hidden={true} ref={canvasRef} />
+      <video ref={videoRef} playsInline={true} autoPlay={true} />
     </Fragment>
   )
 }
