@@ -5,8 +5,6 @@ export const QRCodeReader = () => {
   const height = window.innerHeight;
   const width = window.innerWidth;
 
-  console.log({height, width})
-
   const videoRef = createRef();
   const canvasRef = createRef();
 
