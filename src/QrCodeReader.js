@@ -1,13 +1,11 @@
 import React, { useEffect, createRef, Fragment } from 'react';
 import jsQR from 'jsqr';
 
-function useMount(fn) {
-  useEffect(() => {
-    fn();
-  }, [fn])
+const useMount = (fn) => {
+  useEffect(() => fn(), [fn])
 }
 
-export const QRCodeReader = ({qrCode, setQrCode}) => {
+export const QRCodeReader = ({handlelQrCode}) => {
   const height = window.innerHeight;
   const width = window.innerWidth;
 
@@ -34,9 +32,9 @@ export const QRCodeReader = ({qrCode, setQrCode}) => {
   });
 
   const scan = () => {
-    const canvasContext = canvasRef.current.getContext('2d');
-
     if (videoRef.current.readyState === videoRef.current.HAVE_ENOUGH_DATA) {
+      const canvasContext = canvasRef.current.getContext('2d');
+
       canvasRef.current.width = width;
       canvasRef.current.height = height;
 
@@ -53,12 +51,6 @@ export const QRCodeReader = ({qrCode, setQrCode}) => {
       }
     }
     handleAnimationFrame();
-  }
-
-  const handlelQrCode = ({data}) => {
-    if (data !== qrCode) {
-      setQrCode(data);
-    }
   }
 
   return (
