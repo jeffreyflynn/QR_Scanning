@@ -23,7 +23,7 @@ export const QRCodeReader = ({handlelQrCode}) => {
         inversionAttempts: 'dontInvert'
       });
 
-      if (code) {
+      if (code && code.data.length > 0) {
         handlelQrCode(code);
       }
     }
@@ -31,7 +31,8 @@ export const QRCodeReader = ({handlelQrCode}) => {
   }, [canvasRef, videoRef, height, width, handlelQrCode])
 
   useEffect(() => {
-    const getMediaStream = async () => {
+    // On mount - get the media stream, set it to the video element, and init animation frames.
+    (async () => {
       try {
         const hasUserMedia = Boolean(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
 
@@ -49,8 +50,7 @@ export const QRCodeReader = ({handlelQrCode}) => {
       } catch(err) {
         console.log(err);
       }
-    }
-    getMediaStream();
+    })()
   }, [videoRef, height, width, scan]);
 
   return (
