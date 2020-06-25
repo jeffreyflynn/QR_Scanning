@@ -15,9 +15,7 @@ export const QRCodeReader = () => {
 
           const codeReader = new BrowserQRCodeReader();
 
-          const result = await codeReader.decodeFromInputVideoDevice(undefined, videoRef.current);
-
-          const qrData = result.text;
+          const { text: qrData } = await codeReader.decodeFromInputVideoDevice(undefined, videoRef.current);
 
           if (qrData !== qrCode) {
             setQrCode(qrData);
