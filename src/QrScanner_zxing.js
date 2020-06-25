@@ -1,16 +1,10 @@
-import React, { useEffect, createRef, Fragment, useCallback, useState } from 'react';
+import React, { useEffect, createRef, Fragment, useState } from 'react';
 import { BrowserQRCodeReader } from '@zxing/library';
 
 export const QRCodeReader = () => {
   const videoRef = createRef();
 
   const [qrCode, setQrCode] = useState(null);
-
-  const handlelQrCode = useCallback((data) => {
-    if (data !== qrCode) {
-      setQrCode(data);
-    }
-  }, [qrCode])
 
   useEffect(() => {
     (async () => {
@@ -23,13 +17,17 @@ export const QRCodeReader = () => {
 
           const result = await codeReader.decodeFromInputVideoDevice(undefined, videoRef.current);
 
-          handlelQrCode(result.text);
+          const qrData = result.text;
+
+          if (qrData !== qrCode) {
+            setQrCode(qrData);
+          }
         }
       } catch(err) {
         console.log(err);
       }
     })()
-  }, [videoRef, handlelQrCode]);
+  }, [videoRef, setQrCode, qrCode]);
 
   return (
     <Fragment>
