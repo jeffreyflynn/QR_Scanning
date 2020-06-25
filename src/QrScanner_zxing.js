@@ -33,7 +33,7 @@ export const QRCodeReader = () => {
 
   return (
     <Fragment>
-      <video ref={videoRef} autoPlay={false} />
+      <video ref={videoRef} />
       {qrCode !== null && <div className="qr-code">{qrCode}</div>}
     </Fragment>
   )
