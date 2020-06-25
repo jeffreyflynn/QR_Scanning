@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "df1c579c4d02587ac5e9982486b4dc3e",
+    "revision": "4eeb302c31cb2d37c0cc2e38ffc1650b",
     "url": "/QR_Scanning/index.html"
   },
   {
-    "revision": "65030cd11be3b1503c36",
+    "revision": "f599cba51c425ef789e7",
     "url": "/QR_Scanning/static/css/main.e1ccaa11.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/QR_Scanning/static/js/2.64bdd680.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "65030cd11be3b1503c36",
-    "url": "/QR_Scanning/static/js/main.e9bcc61b.chunk.js"
+    "revision": "f599cba51c425ef789e7",
+    "url": "/QR_Scanning/static/js/main.bbf1365c.chunk.js"
   },
   {
     "revision": "b555a5e6f83e21aa8866",
