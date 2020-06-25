@@ -1,5 +1,5 @@
 import React from 'react';
-import { QRCodeReader } from './QrCodeReader';
+import { QRCodeReader } from './QrScanner_zxing';
 
 function App() {
   return (
